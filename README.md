@@ -42,39 +42,39 @@
 
 # Examples:
 
-## Get:
+### Get:
 	$cat_15 = ORM::factory('Category', 15)->load_tree(  );
 	$cat_15 = ORM::factory('Category'    )->load_tree(15);
 
-## All root elements:
+### All root elements:
 	ORM::factory('Category')->roots;
 
-## Current root:
+### Current root:
 	ORM::factory('Category')->root;
 
-## Move:
+### Move:
 	$cat_15->move(ORM::factory('Category', 21));
 	$cat_15->set_position(4);
 
-## Delete:
+### Delete:
 	$cat_15->delete_branch();
 
-## Create root:
+### Create root:
 	ORM::factory('Category')
 		->values($form)
 		->save();
 
-## Create leaf:
+### Create leaf:
 	ORM::factory('Category')
 		->values($form)
 		->insert( ORM::factory('Category', 40) );
 
-## You can use id as target instead of object"
+### You can use id as target instead of object"
 	ORM::factory('Category')
 		->values($form)
 		->insert(40);
 
-## Outputs :
+### Outputs :
 	function r_render(Model_Category $category) {
 		$result = "";
 		foreach ($category->children as $child) {
@@ -86,7 +86,7 @@
 	echo r_render($category);
 
 
-## $max_level
+### $max_level
 	when depth reach $max_level all elements will be added to parent of such deep element.
 	E.g., when $max_level equals 32
 	"Foo" is closest parent to "Bar" and "Foo" has 31 parents;
