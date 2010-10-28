@@ -18,26 +18,39 @@
 		function is_leaf();
 		function is_descendant (ORM_MP|int $target);
 		function is_child      (ORM_MP|int $target);
-		/* if full_path is sets to true - will check all parents
-		 * else - only closest. it is equals to :
-		 * $target->is_child($this)      if $full_path == false
-		 * $target->is_descendant($this) if $full_path == true
-		 */
 		function is_parent     (ORM_MP|int $target, $full_path = false);
 		function is_sibling    (ORM_MP|int $target);
 
-		// call this if you want to work with descendants
 		function load_tree(int $id = null);
-		// saves element as root
 		function save();
-		// saves element as root, or as child of $target
 		function insert (ORM_MP $target = null);
 		function move   (ORM_MP $target = null);
 		function set_position(int $position = null);
 
 		function delete_branch();
-		// returns the child with such id, or null
 		function get_child($id);
+
+		// Details :
+
+		/** is_parent :
+		 * if full_path is sets to true - will check all parents
+		 * else - only closest. it is equals to :
+		 * $target->is_child($this)      if $full_path == false
+		 * $target->is_descendant($this) if $full_path == true
+		 */
+		/** load_tree:
+		 * call this if you want to work with descendants
+		 */
+		/** save:
+		 * saves element as root
+		 */
+		/** insert:
+		 * saves element as root, or as child of $target
+		 */
+		/** get_child:
+		 * returns the child with some id, or null
+		 */
+
 	}
 
 # Examples:
