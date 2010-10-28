@@ -69,7 +69,7 @@
 		->values($form)
 		->insert( ORM::factory('Category', 40) );
 
-### You can use id as target instead of object"
+### You can use ID as target instead of object:
 	ORM::factory('Category')
 		->values($form)
 		->insert(40);
