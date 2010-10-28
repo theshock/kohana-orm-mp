@@ -55,15 +55,15 @@
 
 # Examples:
 
+### All root elements:
+	ORM::factory('Category')->roots;
+
 ### Get:
 	$cat_15 = ORM::factory('Category', 15)->load_tree(  );
 	$cat_15 = ORM::factory('Category'    )->load_tree(15);
 
-### All root elements:
-	ORM::factory('Category')->roots;
-
-### Current root:
-	ORM::factory('Category')->root;
+### Root of element:
+	$cat_15->root;
 
 ### Move:
 	$cat_15->move(ORM::factory('Category', 21));
