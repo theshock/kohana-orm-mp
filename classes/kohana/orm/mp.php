@@ -33,6 +33,9 @@ class Kohana_ORM_MP extends ORM {
 		$this->tree_loaded = true;
 
 		$cats = $this->create();
+		if (is_callable($id)) {
+			$id($cats);
+		}
 		if ($this->path || $id) {
 			$path = $id ? "%.$id.%" : $this->path . '%';
 			$cats->where('path', 'like', $path);
