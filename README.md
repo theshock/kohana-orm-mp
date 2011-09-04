@@ -22,8 +22,8 @@
 		function is_sibling    (ORM_MP|int $target);
 
 		function load_tree(int $id = null);
-		function save();
-		function insert (ORM_MP $target = null);
+		function save(Validation $validation);
+		function insert (ORM_MP $target = null, Validation $validation);
 		function move   (ORM_MP $target = null);
 		function set_position(int $position = null);
 
