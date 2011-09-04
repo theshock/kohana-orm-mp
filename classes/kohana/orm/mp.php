@@ -101,7 +101,7 @@ class Kohana_ORM_MP extends ORM {
 	}
 
 	public function set_position ($position = null) {
-		$path = ($this->parent && $this->parent->id) ? $this->parent->path : '.' ;
+		$path = ($this->parent_id) ? $this->parent->find()->path : '.' ;
 		$posFrom = (int) $this->position;
 		if ($position) {
 			$posTo = (int) $position;
