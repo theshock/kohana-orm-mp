@@ -64,13 +64,13 @@ class Kohana_ORM_MP extends ORM {
 		return $this;
 	}
 
-	public function save () {
-		return $this->id ? parent::save() : $this->insert();
+	public function save (Validation $validation = NULL) {
+		return $this->id ? parent::save($validation) : $this->insert(NULL, $validation);
 	}
 
-	public function insert ($target = null) {
+	public function insert ($target = null, Validation $validation = NULL) {
 		$target = $target ? $this->target($target) : null;
-		return parent::save()->move($target, true);
+		return parent::save($validation)->move($target, true);
 	}
 
 	public function move ($target = null, $new = false) {
