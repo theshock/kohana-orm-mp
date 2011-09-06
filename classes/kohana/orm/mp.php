@@ -32,7 +32,7 @@ class Kohana_ORM_MP extends ORM {
 		if ($id !== true && $this->tree_loaded) return $this;
 		$this->tree_loaded = true;
 
-		$cats = $this->create();
+		$cats = $this->_create();
 		if (is_callable($id)) {
 			$id($cats);
 		}
@@ -64,13 +64,13 @@ class Kohana_ORM_MP extends ORM {
 		return $this;
 	}
 
-	public function save () {
-		return $this->id ? parent::save() : $this->insert();
+	public function save (Validation $validation = NULL) {
+		return $this->id ? parent::save($validation) : $this->insert(NULL, $validation);
 	}
 
-	public function insert ($target = null) {
+	public function insert ($target = null, Validation $validation = NULL) {
 		$target = $target ? $this->target($target) : null;
-		return parent::save()->move($target, true);
+		return parent::save($validation)->move($target, true);
 	}
 
 	public function move ($target = null, $new = false) {
@@ -101,7 +101,7 @@ class Kohana_ORM_MP extends ORM {
 	}
 
 	public function set_position ($position = null) {
-		$path = ($this->parent && $this->parent->id) ? $this->parent->path : '.' ;
+		$path = ($this->parent_id) ? $this->parent->find()->path : '.' ;
 		$posFrom = (int) $this->position;
 		if ($position) {
 			$posTo = (int) $position;
@@ -143,16 +143,16 @@ class Kohana_ORM_MP extends ORM {
 	}
 
 	public function get_roots() {
-		return $this->create()->where('level', '=', 0);
+		return $this->_create()->where('level', '=', 0);
 	}
 	public function get_root() {
-		return $this->create($this->parent_ids[0]);
+		return $this->_create($this->parent_ids[0]);
 	}
 	public function get_parent() {
-		return $this->create($this->parent_id);
+		return $this->_create($this->parent_id);
 	}
 	public function get_parents() {
-		return $this->create($this->parent_ids);
+		return $this->_create($this->parent_ids);
 	}
 
 	public function get_child ($id) {
@@ -222,7 +222,7 @@ class Kohana_ORM_MP extends ORM {
 		return null;
 	}
 
-	protected function create ($id = null) {
+	protected function _create ($id = null) {
 		$elem = new static;
 		if (is_array($id)) {
 			$elem->where('id', 'in', $id);
